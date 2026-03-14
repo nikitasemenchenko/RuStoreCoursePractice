@@ -1,4 +1,4 @@
-package com.example.rustorecoursepractice.appDetails
+package com.example.rustorecoursepractice.presentation.appDetails
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -35,7 +35,6 @@ fun AppDetailsScreen(
         Toolbar(
             onBackClick = {
                 onBackClick()
-                Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()
             },
             onShareClick = {
                 Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()

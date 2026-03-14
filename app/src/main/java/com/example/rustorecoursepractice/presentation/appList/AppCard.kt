@@ -1,4 +1,4 @@
-package com.example.rustorecoursepractice.appList
+package com.example.rustorecoursepractice.presentation.appList
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,8 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.rustorecoursepractice.appDetails.App
-import com.example.rustorecoursepractice.appDetails.getCategoryText
+import com.example.rustorecoursepractice.presentation.appDetails.App
+import com.example.rustorecoursepractice.presentation.appDetails.getCategoryText
 
 @Composable
 fun AppCard(

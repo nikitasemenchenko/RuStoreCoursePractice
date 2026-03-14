@@ -1,4 +1,4 @@
-package com.example.rustorecoursepractice.appDetails
+package com.example.rustorecoursepractice.presentation.appDetails
 
 data class App(
     val id: Int,

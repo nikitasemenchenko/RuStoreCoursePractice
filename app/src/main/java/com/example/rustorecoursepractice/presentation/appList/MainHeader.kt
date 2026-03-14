@@ -1,6 +1,7 @@
-package com.example.rustorecoursepractice.appList
+package com.example.rustorecoursepractice.presentation.appList
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -19,18 +20,20 @@ import com.example.rustorecoursepractice.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainHeader() {
+fun MainHeader(
+    onClick: () -> Unit
+) {
     TopAppBar(
         title = {
             Image(
                 painter = painterResource(R.drawable.rustore_logo),
                 contentDescription = null,
-                modifier = Modifier.size(150.dp)
+                modifier = Modifier.size(150.dp).clickable(onClick = onClick)
             )
         },
         actions = {
             IconButton(
-                onClick = { /*TODO*/ },
+                onClick = { TODO() },
             ) {
                 Icon(
                     imageVector = Icons.Default.Menu,
