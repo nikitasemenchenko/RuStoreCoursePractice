@@ -1,13 +1,11 @@
-package com.example.rustorecoursepractice.navigation
+package com.example.rustorecoursepractice.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.rustorecoursepractice.appDetails.AppDetailsScreen
-import com.example.rustorecoursepractice.appList.AppListScreen
-import com.example.rustorecoursepractice.appList.getAppById
-import com.example.rustorecoursepractice.appList.getApps
+import com.example.rustorecoursepractice.presentation.appDetails.AppDetails
+import com.example.rustorecoursepractice.presentation.appList.AppListScreen
 
 sealed class Screen(
     val route: String
@@ -24,7 +22,6 @@ sealed class Screen(
 fun NavHost(
     navController: NavHostController
 ) {
-    val apps = getApps()
 
     NavHost(
         navController = navController,
@@ -32,7 +29,6 @@ fun NavHost(
     ) {
         composable(Screen.General.route) {
             AppListScreen(
-                apps,
                 onAppClick = { id ->
                     navController.navigate(Screen.AppDetails(id).route)
                 }
@@ -40,9 +36,8 @@ fun NavHost(
         }
         composable(Screen.AppDetails.route) {
             val id = it.arguments?.getString("id")?.toInt() ?: 1
-            val app = getAppById(id)
-            AppDetailsScreen(
-                app = app,
+            AppDetails(
+                appId = id,
                 onBackClick = {
                     navController.navigate(Screen.General.route)
                 }

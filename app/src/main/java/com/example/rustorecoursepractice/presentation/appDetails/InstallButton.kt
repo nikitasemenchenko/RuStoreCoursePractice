@@ -1,4 +1,4 @@
-package com.example.rustorecoursepractice.appDetails
+package com.example.rustorecoursepractice.presentation.appDetails
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
