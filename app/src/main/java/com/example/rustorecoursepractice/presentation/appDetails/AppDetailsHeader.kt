@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.rustorecoursepractice.R
+import com.example.rustorecoursepractice.domain.App
+import com.example.rustorecoursepractice.domain.Category
 import kotlin.math.roundToInt
 
 @Composable

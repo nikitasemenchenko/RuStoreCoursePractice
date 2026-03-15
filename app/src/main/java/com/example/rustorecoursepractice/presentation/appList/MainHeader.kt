@@ -33,7 +33,7 @@ fun MainHeader(
         },
         actions = {
             IconButton(
-                onClick = { TODO() },
+                onClick = { },
             ) {
                 Icon(
                     imageVector = Icons.Default.Menu,

@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.rustorecoursepractice.presentation.appDetails.App
+import com.example.rustorecoursepractice.domain.App
 import com.example.rustorecoursepractice.presentation.appDetails.getCategoryText
 
 @Composable

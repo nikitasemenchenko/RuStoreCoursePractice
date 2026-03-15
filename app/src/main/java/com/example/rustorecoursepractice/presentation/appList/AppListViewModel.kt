@@ -2,7 +2,10 @@ package com.example.rustorecoursepractice.presentation.appList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.rustorecoursepractice.model.Datasource
+import com.example.rustorecoursepractice.data.AppsRepositoryImpl
+import com.example.rustorecoursepractice.data.AppMapper
+import com.example.rustorecoursepractice.data.AppsApi
+import com.example.rustorecoursepractice.domain.GetAppListUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,6 +19,15 @@ class AppListViewModel : ViewModel() {
     private val _events = Channel<SnackBarEvent>()
     val events = _events.receiveAsFlow()
 
+    val appsRepo = AppsRepositoryImpl(
+        api = AppsApi(),
+        mapper = AppMapper()
+    )
+
+    val getAppListUseCase = GetAppListUseCase(
+        appsRepo
+    )
+
     init {
         loadContent()
     }
@@ -27,9 +39,15 @@ class AppListViewModel : ViewModel() {
     }
 
     fun loadContent() {
-        val apps = getApps()
-        _uiState.value = AppListUiState.Content(apps)
+        runCatching {
+            viewModelScope.launch {
+                _uiState.value = AppListUiState.Loading
+                val apps = getAppListUseCase()
+                _uiState.value = AppListUiState.Content(apps)
+            }
+        }.onFailure {
+            _uiState.value = AppListUiState.Error
+        }
     }
 
-    fun getApps() = Datasource.getApps()
 }
