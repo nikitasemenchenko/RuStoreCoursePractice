@@ -1,4 +1,4 @@
-package com.example.rustorecoursepractice.presentation.appDetails
+package com.example.rustorecoursepractice.domain
 
 enum class Category {
     APP, GAME, FINANCE, INSTRUMENTS, TRANSPORT

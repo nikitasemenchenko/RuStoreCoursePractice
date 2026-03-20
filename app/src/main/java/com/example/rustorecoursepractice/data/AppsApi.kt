@@ -1,11 +1,10 @@
-package com.example.rustorecoursepractice.model
+package com.example.rustorecoursepractice.data
 
-import com.example.rustorecoursepractice.presentation.appDetails.App
-import com.example.rustorecoursepractice.presentation.appDetails.Category
+import com.example.rustorecoursepractice.domain.Category
 
-object Datasource {
-    fun getApps() = listOf(
-        App(
+class AppsApi {
+    suspend fun getApps(): List<AppDetailsDto> = listOf(
+        AppDetailsDto(
             id = 1,
             name = "Яндекс Браузер с Алисой AI",
             developer = "ООО \"ЯНДЕКС\"",
@@ -23,7 +22,7 @@ object Datasource {
             iconUrl = "https://static.rustore.ru/imgproxy/bZNt9jiZUOVXXOG0JdJQleTYIB2cFeE3MaWk7o897jE/preset:web_app_icon_160/plain/https://static.rustore.ru/2025/10/25/1e/apk/579007/content/ICON/939321c0-03f7-484d-9043-c0fb12736ef1.png@webp",
             description = "Яндекс Браузер — быстрый и безопасный браузер с Алисой AI и выгодными покупками."
         ),
-        App(
+        AppDetailsDto(
             id = 2,
             name = "Mail: Почта, Облако, Календарь",
             developer = "VK",
@@ -39,7 +38,7 @@ object Datasource {
             iconUrl = "https://static.rustore.ru/imgproxy/G4zJRwh_JpnM5CLGpQU8bKCUWaCYJCXNWuK_vcqFmOY/preset:web_app_icon_160/plain/https://static.rustore.ru/2025/12/18/49/apk/332223/content/ICON/79bd5fd2-13fb-4218-874f-7d3d651d344f.png@webp",
             description = "Почта Mail — ваш быстрый и удобный почтовый клиент."
         ),
-        App(
+        AppDetailsDto(
             id = 3,
             name = "Яндекс Навигатор",
             developer = "ООО \"ЯНДЕКС\"",
@@ -55,7 +54,7 @@ object Datasource {
             iconUrl = "https://static.rustore.ru/imgproxy/FvKuW-aUKk34jUz1ZEPXebdfDR0ikU93-JJYC5_Oh4Y/preset:web_app_icon_160/plain/https://static.rustore.ru/apk/595135/content/ICON/32cb5e63-9c59-4280-9a6a-c808113be88f.png@webp",
             description = "Выбирайте оптимальные маршруты. Навигатор прокладывает маршруты с учётом пробок, аварий и ремонтных работ. Он предлагает до трёх вариантов проезда и для каждого подсчитывает время в пути. Если маршрут проходит по платному участку, приложение предупредит и об этом."
         ),
-        App(
+        AppDetailsDto(
             id = 4,
             name = "Мой МТС",
             developer = "ПАО МТС",

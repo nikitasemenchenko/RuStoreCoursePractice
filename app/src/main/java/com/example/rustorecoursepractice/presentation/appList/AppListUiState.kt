@@ -1,6 +1,6 @@
 package com.example.rustorecoursepractice.presentation.appList
 
-import com.example.rustorecoursepractice.presentation.appDetails.App
+import com.example.rustorecoursepractice.domain.App
 
 sealed interface AppListUiState {
     data object Loading: AppListUiState

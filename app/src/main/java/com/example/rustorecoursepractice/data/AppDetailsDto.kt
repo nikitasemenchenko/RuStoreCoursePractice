@@ -1,6 +1,8 @@
-package com.example.rustorecoursepractice.presentation.appDetails
+package com.example.rustorecoursepractice.data
 
-data class App(
+import com.example.rustorecoursepractice.domain.Category
+
+data class AppDetailsDto(
     val id: Int,
     val name: String,
     val developer: String,
