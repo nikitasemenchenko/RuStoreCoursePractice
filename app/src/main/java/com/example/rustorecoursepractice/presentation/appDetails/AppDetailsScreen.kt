@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -23,7 +24,6 @@ import com.example.rustorecoursepractice.domain.App
 
 @Composable
 fun AppDetailsScreen(
-    modifier: Modifier = Modifier,
     app: App,
     onBackClick: () -> Unit,
 ) {
@@ -32,7 +32,7 @@ fun AppDetailsScreen(
 
     var descriptionCollapsed by remember { mutableStateOf(false) }
 
-    Column(modifier) {
+    Column(modifier = Modifier.systemBarsPadding()) {
         Toolbar(
             onBackClick = {
                 onBackClick()

@@ -2,8 +2,9 @@ package com.example.rustorecoursepractice.data
 
 import com.example.rustorecoursepractice.domain.App
 import com.example.rustorecoursepractice.domain.AppsRepository
+import javax.inject.Inject
 
-class AppsRepositoryImpl(
+class AppsRepositoryImpl @Inject constructor(
     private val api: AppsApi,
     private val mapper: AppMapper
 ): AppsRepository {

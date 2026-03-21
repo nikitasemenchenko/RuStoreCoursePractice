@@ -1,6 +1,8 @@
 package com.example.rustorecoursepractice.domain
 
-class GetAppListUseCase(
+import javax.inject.Inject
+
+class GetAppListUseCase @Inject constructor(
     private val appsRepository: AppsRepository
 ) {
     suspend operator fun invoke():List<App>{

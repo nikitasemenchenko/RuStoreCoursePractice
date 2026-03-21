@@ -16,14 +16,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun AppListScreen(
-    onAppClick: (Int) -> Unit
+    onAppClick: (Int) -> Unit,
+    vm: AppListViewModel = hiltViewModel()
 ) {
-    val vm: AppListViewModel = viewModel()
     val snackbarHostState = remember { SnackbarHostState() }
     val uiState by vm.uiState.collectAsStateWithLifecycle()
 

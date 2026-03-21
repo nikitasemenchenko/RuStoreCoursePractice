@@ -5,29 +5,25 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun AppDetails(
-    appId: Int,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    vm: AppDetailsViewModel = hiltViewModel()
 ){
-    val vm: AppDetailsViewModel = viewModel()
     val uiState by vm.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(appId) {
-        vm.loadApp(appId)
-    }
 
     when(val currentState = uiState){
         is AppDetailsUiState.Content -> {
             val app = currentState.app
-            AppDetailsScreen(app = app, onBackClick = onBackClick)
+            AppDetailsScreen(
+                app = app,
+                onBackClick = onBackClick)
         }
         AppDetailsUiState.Error -> {
             Box(
