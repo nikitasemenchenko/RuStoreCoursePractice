@@ -1,8 +1,9 @@
 package com.example.rustorecoursepractice.data
 
 import com.example.rustorecoursepractice.domain.Category
+import javax.inject.Inject
 
-class AppsApi {
+class AppsApi  @Inject constructor(){
     suspend fun getApps(): List<AppDetailsDto> = listOf(
         AppDetailsDto(
             id = 1,

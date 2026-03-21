@@ -1,32 +1,39 @@
 package com.example.rustorecoursepractice.presentation.appDetails
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.rustorecoursepractice.data.AppDetailsRepositoryImpl
-import com.example.rustorecoursepractice.data.AppMapper
-import com.example.rustorecoursepractice.data.AppsApi
+import com.example.rustorecoursepractice.domain.AppDetailsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AppDetailsViewModel : ViewModel() {
+@HiltViewModel
+class AppDetailsViewModel @Inject constructor(
+    private val appDetailsRepo: AppDetailsRepository,
+    savedStateHandle: SavedStateHandle,
+) : ViewModel() {
     private val _uiState = MutableStateFlow<AppDetailsUiState>(AppDetailsUiState.Loading)
     val uiState = _uiState.asStateFlow()
 
-    val appDetailsRepo = AppDetailsRepositoryImpl(
-        api = AppsApi(),
-        mapper = AppMapper()
-    )
+    private val appId: Int = (savedStateHandle["id"] as? String)?.toInt() ?: 0
+
+    init {
+        loadApp(appId)
+    }
 
     fun loadApp(id: Int) {
-        runCatching {
-            viewModelScope.launch {
+        viewModelScope.launch {
+            runCatching {
                 _uiState.value = AppDetailsUiState.Loading
-                val app = appDetailsRepo.getAppById(id)
+                appDetailsRepo.getAppById(id)
+            }.onSuccess { app ->
                 _uiState.value = AppDetailsUiState.Content(app)
+            }.onFailure {
+                _uiState.value = AppDetailsUiState.Error
             }
-        }.onFailure {
-            _uiState.value = AppDetailsUiState.Error
         }
     }
 }

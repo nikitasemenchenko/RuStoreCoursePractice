@@ -1,8 +1,9 @@
 package com.example.rustorecoursepractice.data
 
 import com.example.rustorecoursepractice.domain.App
+import javax.inject.Inject
 
-class AppMapper {
+class AppMapper @Inject constructor() {
     fun toDomain(dto: AppDetailsDto): App = App(
         id = dto.id,
         name = dto.name,

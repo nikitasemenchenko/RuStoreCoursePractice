@@ -35,11 +35,9 @@ fun NavHost(
             )
         }
         composable(Screen.AppDetails.route) {
-            val id = it.arguments?.getString("id")?.toInt() ?: 1
             AppDetails(
-                appId = id,
                 onBackClick = {
-                    navController.navigate(Screen.General.route)
+                    navController.popBackStack()
                 }
             )
         }
