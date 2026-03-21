@@ -19,12 +19,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.rustorecoursepractice.domain.App
-import com.example.rustorecoursepractice.presentation.appDetails.getCategoryText
 
 @Composable
 fun AppCard(
     app: App,
-    onAppClick: (Int) -> Unit
+    onAppClick: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -58,11 +57,12 @@ fun AppCard(
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = app.smallDescription,
+                    text = app.description,
+                    maxLines = 1,
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Text(
-                    text = getCategoryText(app.category),
+                    text = app.category,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.Gray

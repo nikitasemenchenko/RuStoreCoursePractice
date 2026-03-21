@@ -8,6 +8,7 @@ class AppsRepositoryImpl @Inject constructor(
     private val api: AppsApi,
     private val mapper: AppMapper
 ): AppsRepository {
+
     override suspend fun getApps(): List<App> {
         val apps = api.getApps().map { mapper.toDomain(it) }
         return apps
