@@ -20,11 +20,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.rustorecoursepractice.R
-import com.example.rustorecoursepractice.domain.App
+import com.example.rustorecoursepractice.domain.AppDetails
 
 @Composable
 fun AppDetailsScreen(
-    app: App,
+    app: AppDetails,
     onBackClick: () -> Unit,
 ) {
     val context = LocalContext.current
