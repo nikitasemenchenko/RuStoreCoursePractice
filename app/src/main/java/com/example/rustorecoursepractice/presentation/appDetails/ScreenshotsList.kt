@@ -3,9 +3,9 @@ package com.example.rustorecoursepractice.presentation.appDetails
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -35,26 +35,11 @@ fun ScreenshotsList(
                     model = screenshotUrlList[index],
                     contentDescription = null,
                     modifier = Modifier
-                        .fillMaxWidth()
                         .clip(RoundedCornerShape(8.dp))
                         .padding(4.dp)
-                        .height(300.dp)
+                        .size(200.dp)
                 )
             }
         }
-//        HorizontalPager(
-//            modifier = Modifier.fillMaxWidth(),
-//            contentPadding = contentPadding,
-//            pageSpacing = 8.dp,
-//            state = rememberPagerState { screenshotUrlList.size },
-//        ) { index ->
-//            AsyncImage(
-//                model = screenshotUrlList[index],
-//                contentDescription = null,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .clip(RoundedCornerShape(8.dp))
-//            )
-//        }
     }
 }

@@ -1,6 +1,9 @@
-package com.example.rustorecoursepractice.domain
+package com.example.rustorecoursepractice.data
 
-data class App(
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class AppDto(
     val id: String,
     val name: String,
     val description: String,

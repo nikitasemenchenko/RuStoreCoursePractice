@@ -21,7 +21,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun AppListScreen(
-    onAppClick: (Int) -> Unit,
+    onAppClick: (String) -> Unit,
     vm: AppListViewModel = hiltViewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }

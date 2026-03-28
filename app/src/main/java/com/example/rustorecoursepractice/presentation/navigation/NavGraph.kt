@@ -6,17 +6,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.rustorecoursepractice.presentation.appDetails.AppDetails
 import com.example.rustorecoursepractice.presentation.appList.AppListScreen
+import kotlinx.serialization.Serializable
 
-sealed class Screen(
-    val route: String
-) {
-    object General : Screen("general")
-    data class AppDetails(val id: Int) : Screen("appDetails/$id") {
-        companion object {
-            const val route = "appDetails/{id}"
-        }
-    }
-}
+@Serializable
+object AppListRoute
+
+@Serializable
+data class AppDetailsRoute(val id: String)
 
 @Composable
 fun NavHost(
@@ -25,16 +21,16 @@ fun NavHost(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.General.route
+        startDestination = AppListRoute
     ) {
-        composable(Screen.General.route) {
+        composable<AppListRoute> {
             AppListScreen(
                 onAppClick = { id ->
-                    navController.navigate(Screen.AppDetails(id).route)
+                    navController.navigate(AppDetailsRoute(id))
                 }
             )
         }
-        composable(Screen.AppDetails.route) {
+        composable<AppDetailsRoute> {
             AppDetails(
                 onBackClick = {
                     navController.popBackStack()

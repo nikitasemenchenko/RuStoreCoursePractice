@@ -24,13 +24,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.rustorecoursepractice.R
-import com.example.rustorecoursepractice.domain.App
-import com.example.rustorecoursepractice.domain.Category
+import com.example.rustorecoursepractice.domain.AppDetails
 import kotlin.math.roundToInt
 
 @Composable
 fun AppDetailsHeader(
-    app: App,
+    app: AppDetails,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -48,7 +47,7 @@ fun AppDetailsHeader(
         Spacer(Modifier.width(16.dp))
         Column {
             Text(
-                text = getCategoryText(app.category),
+                text = app.category,
                 color = MaterialTheme.colorScheme.secondary,
                 fontSize = 12.sp,
             )
@@ -83,16 +82,4 @@ fun AppDetailsHeader(
             }
         }
     }
-}
-
-// Статичные строки, которые не приходят из бэкенда
-// нужно хранить в ресурсах (strings.xml).
-@Composable
-fun getCategoryText(category: Category): String = when (category) {
-    Category.APP -> stringResource(R.string.category_app)
-    Category.GAME -> stringResource(R.string.category_game)
-    Category.FINANCE -> stringResource(R.string.category_finance)
-    Category.INSTRUMENTS -> stringResource(R.string.category_instruments)
-    Category.TRANSPORT ->  stringResource(R.string.category_transport)
-
 }
