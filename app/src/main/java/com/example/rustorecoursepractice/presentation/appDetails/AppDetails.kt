@@ -23,7 +23,11 @@ fun AppDetails(
             val app = currentState.app
             AppDetailsScreen(
                 app = app,
-                onBackClick = onBackClick)
+                onBackClick = onBackClick,
+                onAddToWishListClick = {
+                    vm.toggleWishlist()
+                }
+                )
         }
         AppDetailsUiState.Error -> {
             Box(
