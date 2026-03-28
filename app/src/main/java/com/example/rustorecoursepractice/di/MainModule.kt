@@ -1,6 +1,10 @@
 package com.example.rustorecoursepractice.di
 
+import android.app.Application
+import androidx.room.Room
 import com.example.rustorecoursepractice.data.AppsApi
+import com.example.rustorecoursepractice.data.local.AppDatabase
+import com.example.rustorecoursepractice.data.local.AppDetailsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +15,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
+import javax.inject.Singleton
 
 
 @Module
@@ -42,5 +47,21 @@ object MainModule {
     @Provides
     fun getApi(retrofit: Retrofit): AppsApi {
         return retrofit.create(AppsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application): AppDatabase {
+        return Room.databaseBuilder(
+            app,
+            AppDatabase::class.java,
+            AppDatabase.DATABASE_NAME
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDetailsDao(database: AppDatabase): AppDetailsDao {
+        return database.appDetailsDao()
     }
 }
