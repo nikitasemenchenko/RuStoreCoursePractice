@@ -26,6 +26,7 @@ import com.example.rustorecoursepractice.domain.AppDetails
 fun AppDetailsScreen(
     app: AppDetails,
     onBackClick: () -> Unit,
+    onAddToWishListClick: () -> Unit
 ) {
     val context = LocalContext.current
     val underDevelopmentText = stringResource(R.string.under_developement)
@@ -40,6 +41,8 @@ fun AppDetailsScreen(
             onShareClick = {
                 Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()
             },
+            onAddToWishListClick = onAddToWishListClick,
+            isInWishList = app.isInWishList
         )
         Spacer(Modifier.height(8.dp))
         AppDetailsHeader(

@@ -7,8 +7,10 @@ import androidx.navigation.toRoute
 import com.example.rustorecoursepractice.domain.AppDetailsRepository
 import com.example.rustorecoursepractice.presentation.navigation.AppDetailsRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,14 +30,21 @@ class AppDetailsViewModel @Inject constructor(
 
     fun loadApp(id: String) {
         viewModelScope.launch {
-            runCatching {
-                _uiState.value = AppDetailsUiState.Loading
-                appDetailsRepo.getAppById(id)
-            }.onSuccess { app ->
-                _uiState.value = AppDetailsUiState.Content(app)
-            }.onFailure {
-                _uiState.value = AppDetailsUiState.Error
-            }
+            _uiState.value = AppDetailsUiState.Loading
+            appDetailsRepo.getAppById(id)
+                .catch { e ->
+                    if(e is CancellationException) throw e
+                    _uiState.value = AppDetailsUiState.Error
+                }
+                .collect { appDetails ->
+                    _uiState.value = AppDetailsUiState.Content(appDetails)
+                }
+        }
+    }
+
+    fun toggleWishlist() {
+        viewModelScope.launch {
+            appDetailsRepo.toggleWishlist(appId)
         }
     }
 }

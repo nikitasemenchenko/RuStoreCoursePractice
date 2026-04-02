@@ -2,6 +2,7 @@ package com.example.rustorecoursepractice.presentation.appList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rustorecoursepractice.R
 import com.example.rustorecoursepractice.domain.GetAppListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
 class AppListViewModel @Inject constructor(
@@ -18,7 +20,7 @@ class AppListViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<AppListUiState>(AppListUiState.Loading)
     val uiState = _uiState.asStateFlow()
 
-    private val _events = Channel<SnackBarEvent>()
+    private val _events = Channel<AppListEvent>()
     val events = _events.receiveAsFlow()
 
     init {
@@ -27,7 +29,7 @@ class AppListViewModel @Inject constructor(
 
     fun onLogoClick() {
         viewModelScope.launch {
-            _events.send(SnackBarEvent.SnackBar("Клик на лого"))
+            _events.send(AppListEvent.ShowSnackBar(R.string.logo_click))
         }
     }
 
@@ -38,7 +40,8 @@ class AppListViewModel @Inject constructor(
                 getAppListUseCase()
             }.onSuccess { apps ->
                 _uiState.value = AppListUiState.Content(apps)
-            }.onFailure {
+            }.onFailure { e ->
+                if (e is CancellationException) throw e
                 _uiState.value = AppListUiState.Error
             }
         }

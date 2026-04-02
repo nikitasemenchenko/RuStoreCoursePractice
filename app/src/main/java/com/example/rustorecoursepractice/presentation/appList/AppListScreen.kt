@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
@@ -26,11 +27,14 @@ fun AppListScreen(
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val uiState by vm.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         vm.events.collect { event ->
-            if(event is SnackBarEvent.SnackBar){
-                snackbarHostState.showSnackbar(message = event.text)
+            when(event){
+                is AppListEvent.ShowSnackBar -> {
+                    snackbarHostState.showSnackbar(message = context.getString(event.textId))
+                }
             }
         }
     }
