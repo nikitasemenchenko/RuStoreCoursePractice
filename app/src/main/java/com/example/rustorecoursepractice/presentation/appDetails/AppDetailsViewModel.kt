@@ -7,6 +7,7 @@ import androidx.navigation.toRoute
 import com.example.rustorecoursepractice.domain.AppDetailsRepository
 import com.example.rustorecoursepractice.presentation.navigation.AppDetailsRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -31,7 +32,8 @@ class AppDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = AppDetailsUiState.Loading
             appDetailsRepo.getAppById(id)
-                .catch {
+                .catch { e ->
+                    if(e is CancellationException) throw e
                     _uiState.value = AppDetailsUiState.Error
                 }
                 .collect { appDetails ->

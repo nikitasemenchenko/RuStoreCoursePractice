@@ -1,5 +1,6 @@
 package com.example.rustorecoursepractice.presentation.appList
 
+import androidx.annotation.StringRes
 import com.example.rustorecoursepractice.domain.App
 
 sealed interface AppListUiState {
@@ -8,6 +9,6 @@ sealed interface AppListUiState {
     data class Content(val appList: List<App>) : AppListUiState
 }
 
-sealed class SnackBarEvent{
-    data class SnackBar(val text: String): SnackBarEvent()
+sealed class AppListEvent{
+    data class ShowSnackBar(@StringRes val textId: Int): AppListEvent()
 }
