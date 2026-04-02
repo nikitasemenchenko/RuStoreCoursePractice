@@ -13,7 +13,7 @@ interface AppDetailsDao {
     fun getAppDetails(id: String): Flow<AppDetailsEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAppDetails(appDetails: AppDetailsEntity)
+    suspend fun insertAppDetails(appDetails: AppDetailsEntity)
 
     @Query("UPDATE app_details SET isInWishlist = :isInWishlist WHERE id = :id")
     suspend fun updateWishlistStatus(id: String, isInWishlist: Boolean)
